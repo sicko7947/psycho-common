@@ -1,4 +1,4 @@
-module psycho-common
+module psychoCommon
 
 go 1.16
 
