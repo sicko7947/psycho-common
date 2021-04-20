@@ -18,7 +18,7 @@ func GetMACAddress() (string, error) {
 	if err != nil {
 		panic(err.Error())
 	}
-	mac, macerr := "", errors.New("无法获取到正确的MAC地址")
+	mac, macerr := "", errors.New("ERROR_GETTING_MAC_ADDRESS")
 	for i := 0; i < len(netInterfaces); i++ {
 		if (netInterfaces[i].Flags&net.FlagUp) != 0 && (netInterfaces[i].Flags&net.FlagLoopback) == 0 {
 			addrs, _ := netInterfaces[i].Addrs()

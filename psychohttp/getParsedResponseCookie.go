@@ -1,4 +1,4 @@
-package psyhttp
+package psychohttp
 
 import (
 	"fmt"

@@ -1,10 +1,8 @@
-package psyhttp
+package psychohttp
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
+	"math/rand"
 	"strings"
 )
 
@@ -26,23 +24,22 @@ var (
 	ProxyHTTP   ProxyType = "http"
 )
 
-func GetProxyList(path string) []string {
-	file, err := os.Open(path)
-	if err != nil {
-		log.Fatal(err)
+// GetRawProxy : GetRawProxy
+func GetRawProxy(proxylist []string) string {
+	if len(proxylist) <= 0 {
+		return ""
 	}
-	defer func() {
-		if err = file.Close(); err != nil {
-			log.Fatal(err)
-		}
-	}()
 
-	rawData, _ := ioutil.ReadAll(file)
-	proxyList := strings.Split(strings.Replace(string(rawData), "\r\n", "\n", -1), "\n")
-	return proxyList
+	return strings.Replace(proxylist[rand.Intn(len(proxylist))], "\r\n", "\n", -1)
 }
 
-func GetProxy(p string) *Proxy {
+// GetProxy : GetProxy
+func GetProxy(proxylist []string) *Proxy {
+	if len(proxylist) <= 0 {
+		return &Proxy{}
+	}
+	p := strings.Replace(proxylist[rand.Intn(len(proxylist))], "\r\n", "\n", -1)
+
 	raw := strings.Split(p, ":")
 
 	proxy := &Proxy{
@@ -57,12 +54,16 @@ func GetProxy(p string) *Proxy {
 }
 
 func (p Proxy) String() string {
+	if len(p.Host) <= 0 {
+		return ""
+	}
 	if p.NeedAuth {
 		return fmt.Sprintf("%v://%v:%v@%v:%v", p.Protocol, p.Username, p.Password, p.Host, p.Port)
 	}
 	return fmt.Sprintf("%v://%v:%v", p.Protocol, p.Host, p.Port)
 }
 
+// GetProxyTypes : GetProxyTypes
 func GetProxyTypes() []ProxyType {
 	var types = []ProxyType{ProxySocks5, ProxySocks4, ProxyHTTP, ProxyHTTPS}
 	return types
