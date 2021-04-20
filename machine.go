@@ -1,4 +1,4 @@
-package machine
+package common
 
 import (
 	"crypto/md5"

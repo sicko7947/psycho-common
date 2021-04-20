@@ -1,4 +1,4 @@
-package fs
+package common
 
 import (
 	"encoding/json"
