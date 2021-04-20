@@ -1,4 +1,4 @@
-package psychoCommon
+package sickocommon
 
 import (
 	"math/rand"

@@ -1,4 +1,4 @@
-package common
+package sickocommon
 
 import (
 	"crypto/md5"

@@ -1,4 +1,4 @@
-module common
+module sickocommon
 
 go 1.16
 
