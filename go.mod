@@ -1,4 +1,4 @@
-module sickocommon
+module github.com/sicko7947/sickocommon
 
 go 1.16
 
