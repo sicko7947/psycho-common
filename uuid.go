@@ -11,8 +11,7 @@ func getBase() string {
 	return slice[index]
 }
 
-// GetUUID : Get Formatted Nike Type UUID as string
-func GetUUID() string {
+func NikeUUID() string {
 	data := "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
 	for i := 0; i <= 29; i++ {
 		data = strings.Replace(data, "x", getBase(), 1)
