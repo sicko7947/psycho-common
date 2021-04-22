@@ -28,7 +28,7 @@ func ReadJson(f string, data interface{}) error {
 	return nil
 }
 
-func CopyFile(src, dst string) error {
+func CopyFile(src, dst string, force bool) error {
 	sourceFileStat, err := os.Stat(src)
 	if err != nil {
 		return err
@@ -46,7 +46,13 @@ func CopyFile(src, dst string) error {
 
 	_, err = os.Stat(dst)
 	if err == nil {
-		return fmt.Errorf("File %s already exists.", dst)
+		if !force {
+			return fmt.Errorf("File %s already exists.", dst)
+		}
+		e := os.Remove(dst)
+		if e != nil {
+			return fmt.Errorf("Error force removing file %s.", dst)
+		}
 	}
 
 	destination, err := os.Create(dst)

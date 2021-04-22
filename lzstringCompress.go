@@ -34,7 +34,7 @@ import (
 // Compress
 const _defaultKeyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 
-func Compress(uncompressed string, keyStrBase64 string) string {
+func LZCompress(uncompressed string, keyStrBase64 string) string {
 	if len(uncompressed) == 0 {
 		return ""
 	}
@@ -384,7 +384,7 @@ func concatWithFirstRune(str string, getFirstRune string) string {
 	return str + string(r)
 }
 
-func Decompress(input string, keyStrBase64 string) (string, error) {
+func LZDecompress(input string, keyStrBase64 string) (string, error) {
 	if keyStrBase64 == "" {
 		keyStrBase64 = _defaultKeyStrBase64
 	}
