@@ -1,6 +1,9 @@
 package sickocommon
 
-import "os"
+import (
+	"os"
+	"runtime"
+)
 
 func PathCheckAndCreate(s string, perm os.FileMode) error {
 	ext, err := PathExists(s)
@@ -19,4 +22,15 @@ func PathExists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+func GetAppdataPath() string {
+	if runtime.GOOS == "windows" {
+		home := os.Getenv("HOMEDRIVE") + os.Getenv("HOMEPATH")
+		if home == "" {
+			home = os.Getenv("USERPROFILE")
+		}
+		return home
+	}
+	return os.Getenv("HOME") + "\\AppData"
 }
